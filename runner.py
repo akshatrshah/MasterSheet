@@ -30,6 +30,14 @@ def open_new_client_window():
     subprocess.Popen(["python", "new_client.py"])
 
 
+def change_weightage():
+    subprocess.Popen(["python", "change_weightage.py"])
+
+
+def change_baskets():
+    subprocess.Popen(["python", "change_baskets.py"])
+
+
 def submit():
     stock_name = stock_name_entry.get()
     basket_name = basket_name_entry.get()
@@ -40,10 +48,9 @@ def submit():
 
     if basket_name != '':
         # Perform action with the inputs
-
         x = main(stock_name, dictionary[basket_name])
 
-    # Clear the entry fields
+        # Clear the entry fields
         stock_name_entry.delete(0, tk.END)
         basket_name_entry.delete(0, tk.END)
 
@@ -89,12 +96,29 @@ text_widget.pack(fill=tk.BOTH, expand=True, padx=20, pady=20)
 # Redirect stdout to the Text widget
 redirect_stdout_to_text_widget(text_widget)
 
-new_client_button = tk.Button(
-    window, text="Create New Client", command=open_new_client_window)
-new_client_button.pack(padx=10, pady=10)
+# Create a frame for the buttons
+button_frame = tk.Frame(window)
+button_frame.pack(side=tk.BOTTOM, pady=10)
 
+# Create New Client Button
 new_client_button = tk.Button(
-    window, text="Clear Data", command=delete_cell)
-new_client_button.pack(padx=20, pady=10)
+    button_frame, text="Create New Client", command=open_new_client_window)
+new_client_button.pack(side=tk.LEFT, padx=10, pady=10)
+
+# Remove Script Button
+remove_script_button = tk.Button(
+    button_frame, text="Remove Script", command=delete_cell)
+remove_script_button.pack(side=tk.LEFT, padx=10, pady=10)
+
+# Change Baskets Button
+change_baskets_button = tk.Button(
+    button_frame, text="Change Baskets", command=change_baskets)
+change_baskets_button.pack(side=tk.LEFT, padx=10, pady=10)
+
+# Change Weightage Button
+change_weightage_button = tk.Button(
+    button_frame, text="Change Weightage", command=change_weightage)
+change_weightage_button.pack(side=tk.LEFT, padx=10, pady=10)
+
 # Start the Tkinter event loop
 window.mainloop()

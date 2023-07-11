@@ -1,3 +1,4 @@
+# Logic for CLEAR SCRIPT
 import pandas as pd
 import win32com.client as win32
 
@@ -39,9 +40,6 @@ def deleting_the_specific_stock(stock_name, basket_name):
         columns_to_fill = [0, 2, 5]
         df.iloc[:-1, columns_to_fill] = df.iloc[:-1,
                                                 columns_to_fill].fillna(method='ffill')
-        # print(df)
-        # df.loc[(df['Strategy'] == basket_name) & (
-        #     df['Script'] == stock_name), 'Script'].iloc[:1] = ''
         df.at[df.loc[(df['Strategy'] == basket_name) & (
             df['Script'] == stock_name)].index[0], 'Script'] = ''
         result_rows = df.index[df['Strategy'].isin(['total', 'Total', 'TOTAL'])].tolist(
@@ -57,19 +55,6 @@ def deleting_the_specific_stock(stock_name, basket_name):
         # print(df)
         with pd.ExcelWriter("Master R&D.xlsx", mode="a", engine="openpyxl", if_sheet_exists='replace') as writer:
             df.to_excel(writer, sheet_name=i, index=False)
-
-    # result_rows = df.index[df['Strategy'].isin(['total', 'Total', 'TOTAL'])].tolist(
-    # )
-    # for index, row in df.iloc[:-1].iterrows():
-    #     total_cell_reference = f"E{result_rows[0]+2}"
-    #     allocated_cell_reference = f"B{row.name+2}/F{row.name+2}"
-    #     df.at[row.name,
-    #           'Total Allocation'] = f"={total_cell_reference}*C{row.name+2}/100"
-    #     df.at[row.name,
-    #           'Allocated'] = f"={allocated_cell_reference}"
-        # print(df)
-    # with pd.ExcelWriter("Master R&D.xlsx", mode="a", engine="openpyxl", if_sheet_exists='replace') as writer:
-    #     df.to_excel(writer, sheet_name=i, index=False)
 
     excel = win32.gencache.EnsureDispatch('Excel.Application')
     workbook = excel.Workbooks.Open(

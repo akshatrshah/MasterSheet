@@ -31,6 +31,8 @@ def myfunc(update_clients, basket_name, stock_name):
         if content:
             print('Client Name: '+i.capitalize() + "  " + content)
 
+# myfunc2 called when you want to put the stock name in please of nan values
+
 
 def myfunc2(update_clients, basket_name, stock_name):
     for i in update_clients:

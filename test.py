@@ -1,80 +1,59 @@
-import win32com.client as win32
-import pandas as pd
+# import tkinter as tk
+# from tkinter import messagebox
+# from tkinter import ttk
+
+# items = ["Item 1", "Item 2", "Item 3", "Item 4"]
+# clients = ["Client 1", "Client 2", "Client 3", "Client 4"]
 
 
-def myfunc(update_clients, basket_name, stock_name):
-    print("Basket Name: " + basket_name.upper() + " allocation available: ")
-    for i in update_clients:
-        dfmain = pd.read_excel('Master R&D.xlsx', sheet_name=None)
-        df = dfmain[i]
+# def submit_values():
+#     client = client_dropdown.get()
+#     if not client:
+#         messagebox.showerror("Error", "Please select a client.")
+#         return
 
-        column_indices_to_keep = [0, 1, 2, 3, 4, 5]
-        df = df.iloc[:, column_indices_to_keep]
-        columns_with_merged_cells = [0, 1, 2, 5]
-        df.iloc[:, columns_with_merged_cells] = df.iloc[:,
-                                                        columns_with_merged_cells].fillna(method='ffill')
+#     values = []
+#     for index, entry in enumerate(entry_list):
+#         value = entry.get()
+#         if not value.isdigit():
+#             messagebox.showerror(
+#                 "Error", "Please enter a valid numerical value.")
+#             return
+#         values.append(int(value))
 
-        column_name = 'Strategy'
-        value_to_find = basket_name
-        mask = df[column_name] == value_to_find
-        filtered_rows = df[mask][df[mask].isnull().any(axis=1)]
+#     # Process the values (e.g., print or store them)
+#     print("Client:", client)
+#     print("Values:", values)
+#     # TODO: Further processing or storage logic
 
-        # Replace NaN values with stock name
-        filtered_rows.loc[:, 'Allocated'].fillna(stock_name, inplace=True)
-
-        content = filtered_rows['Allocated'].to_list()
-        content = [round(num, 2) for num in content]
-        content = [str(num)
-                   for num in content if pd.notnull(num)]  # Remove NaN values
-        content = ' '.join(content)
-
-        if content:
-            print('Client Name: ' + i.capitalize() + "  " + content)
-        print(df)
+#     messagebox.showinfo("Success", "Values submitted successfully.")
 
 
-def myfunc2(update_clients, basket_name, stock_name):
-    for i in update_clients:
-        dfmain = pd.read_excel('Master R&D.xlsx', sheet_name=None)
-        df = dfmain[i]
+# window = tk.Tk()
+# window.title("Numerical Input")
+# window.geometry("300x250")
+# window.configure(padx=10, pady=10)
 
-        column_indices_to_keep = [0, 1, 2, 3, 4, 5]
-        df = df.iloc[:, column_indices_to_keep]
-        columns_to_fill = [0, 2, 5]
-        df.iloc[:-1, columns_to_fill] = df.iloc[:-1,
-                                                columns_to_fill].fillna(method='ffill')
-        column_name = 'Strategy'
-        script_column_name = 'Script'
-        value_to_find = basket_name
-        replace_flag = False
+# # Create the client dropdown menu
+# client_label = ttk.Label(window, text="Select Client:")
+# client_label.grid(row=0, column=0, padx=5, pady=5, sticky=tk.W)
+# client_dropdown = ttk.Combobox(window, values=clients, state='readonly')
+# client_dropdown.grid(row=0, column=1, padx=5, pady=5, sticky=tk.W)
 
-        for index, row in df.iloc[:-1].iterrows():
-            if row[column_name] == value_to_find and pd.isnull(row[script_column_name]):
-                if not replace_flag:
-                    df.at[index, script_column_name] = stock_name
-                    replace_flag = True
-                else:
-                    break
-        # print(df)
-        result_rows = df.index[df['Strategy'] == 'total'].tolist()
-        # print(result_rows)
-        for index, row in df.iloc[:-1].iterrows():
-            total_cell_reference = f"E{result_rows[0]+2}"
-            allocated_cell_reference = f"B{row.name+2}/F{row.name+2}"
-            df.at[row.name,
-                  'Total Allocation'] = f"={total_cell_reference}*C{row.name+2}/100"
-            df.at[row.name,
-                  'Allocated'] = f"={allocated_cell_reference}"
-        with pd.ExcelWriter("Master R&D.xlsx", mode="a", engine="openpyxl", if_sheet_exists='overlay') as writer:
-            df.to_excel(writer, sheet_name=i, index=False)
-        # print(df)
-    excel = win32.gencache.EnsureDispatch('Excel.Application')
-    workbook = excel.Workbooks.Open(
-        "D:\AKSHAT\internship_clone\mastering\Master R&D.xlsx")
-    workbook.Save()
-    workbook.Close()
-    excel.Quit()
+# entry_list = []
 
+# for index, item in enumerate(items):
+#     label = tk.Label(window, text=item)
+#     label.grid(row=index+1, column=0, padx=5, pady=5, sticky=tk.W)
+#     entry = tk.Entry(window)
+#     entry.grid(row=index+1, column=1, padx=5, pady=5, sticky=tk.W)
+#     entry_list.append(entry)
 
-# myfunc2(update_clients=['keycap', 'home'],
-#         basket_name='Split (Corporate Action)', stock_name='xyz')
+# submit_button = tk.Button(window, text="Submit", command=submit_values)
+# submit_button.grid(row=len(items)+1, columnspan=2, padx=5, pady=10)
+
+# window.mainloop()
+from main import get_clients, get_corresponding_baskets
+
+x = get_corresponding_baskets('home')
+print(x)
