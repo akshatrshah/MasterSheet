@@ -2,7 +2,6 @@ import tkinter as tk
 from tkinter import messagebox
 from tkinter import ttk
 from change_weightage_logic import change_weightage
-
 from main import get_clients, get_corresponding_baskets
 
 
@@ -21,7 +20,6 @@ def submit_values():
                 messagebox.showerror(
                     "Error", "Please enter a valid numerical value for each basket.")
                 return
-            # values.append(int(value))
             values[basket] = int(value)
         print(values)
 
@@ -63,13 +61,18 @@ def on_client_select(event):
 def update_window_size():
     num_baskets = len(entry_list)
     # Adjust height based on the number of baskets
-    new_height = num_baskets * 30 + 120
-    window.geometry(f"300x{new_height}")
+    new_height = num_baskets * 50 + 120
+    window.geometry(f"500x{new_height}")
+
+    # Adjust padx and pady based on the number of baskets
+    padx = 20
+    pady = 20 + num_baskets * 5
+    window.configure(padx=padx, pady=pady)
 
 
 window = tk.Tk()
 window.title("Numerical Input")
-window.geometry("300x250")
+window.geometry("500x250")
 window.configure(padx=20, pady=20)  # Increase padx and pady for more padding
 
 clients = get_clients()

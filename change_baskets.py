@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox
 from tkinter import ttk
+from change_basket_logic import change_baskets_for_client
 
 from main import get_clients, nammer
 from new_client_logic import create, create_new_client
@@ -18,7 +19,7 @@ def submit():
         items = [listbox.get(index) for index in selected_items]
         messagebox.showinfo(
             "Success", f"New client '{client_name}' added with items:\n- {', '.join(items)}")
-        create_new_client(client_name, items, total)
+        change_baskets_for_client(client_name, items, total)
         clear_fields()
 
 

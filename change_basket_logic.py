@@ -50,4 +50,4 @@ def change_baskets_for_client(name, items, total):
 #     'akshat', ['ETF', 'Buyback ', 'BNH based on Quant'], 500)
 
 # change_baskets_for_client(
-#     'akshat', ['ETF', 'Buyback '], 500)
+#     'keycap', ['ETF', 'Buyback '], 500)
