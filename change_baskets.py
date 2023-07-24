@@ -10,11 +10,13 @@ from new_client_logic import create, create_new_client
 def submit():
     client_name = name_entry.get().strip()
     selected_items = listbox.curselection()
-    total = Total_entry.get()
+    total = Total_entry.get().strip()
 
     if not client_name or not selected_items:
         messagebox.showerror(
             "Error", "Please enter a client name and select items.")
+    elif not total:
+        messagebox.showerror("Error", "Please enter a value for 'Total'.")
     else:
         items = [listbox.get(index) for index in selected_items]
         messagebox.showinfo(

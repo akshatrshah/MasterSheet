@@ -45,7 +45,7 @@ def create_new_client(name, items, total):
         altered_dfhome['Weightage']).round(0)
     altered_dfhome = altered_dfhome.drop('index', axis=1)
     new_row2 = pd.DataFrame(
-        [['Total', None, None, None, allocated_total, None]], columns=altered_dfhome.columns)
+        [['total', None, None, None, allocated_total, None]], columns=altered_dfhome.columns)
     altered_dfhome = altered_dfhome.append(new_row2, ignore_index=True)
     altered_dfhome = formula_generator(altered_dfhome)
     # excel formulas

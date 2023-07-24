@@ -12,6 +12,6 @@ window.title("Lets Start")
 window.geometry('+0+0')
 
 button = tk.Button(window, text="CLICK HERE TO START", command=run_tkinter_app)
-button.pack(pady=20)
+button.pack(padx=300, pady=300)
 
 window.mainloop()

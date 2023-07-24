@@ -17,6 +17,7 @@ def change_baskets_for_client(name, items, total):
         else:
             new_row_data[column] = 'n'
     new_row_data['CLIENT NAME'] = name
+    df = df[~df['CLIENT NAME'].str.contains(name, case=False)]
     df = df.append(new_row_data, ignore_index=True)
     # new client
     columns_to_fill = [0, 2, 5]
