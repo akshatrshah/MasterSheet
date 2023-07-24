@@ -1,11 +1,13 @@
 import pandas as pd
 import numpy as np
+import win32com.client as win32
 from func import myfunc, myfunc2
 
 
 def formula_generator(df):
-    result_rows = df.index[df['Strategy'] == 'Total'].tolist(
-    )
+    # result_rows = df.index[df['Strategy'] == 'Total'].tolist(
+    # )
+    result_rows = df.index[df['Strategy'].str.upper() == 'TOTAL'].tolist()
     for index, row in df.iloc[:-1].iterrows():
         total_cell_reference = f"E{result_rows[0]+2}"
         allocated_cell_reference = f"B{row.name+2}/F{row.name+2}"

@@ -30,7 +30,7 @@ def clear_fields():
 
 
 window = tk.Tk()
-window.title("Edit Client")
+window.title("Change Strategy")
 
 # Create a frame for the input fields
 input_frame = tk.Frame(window)

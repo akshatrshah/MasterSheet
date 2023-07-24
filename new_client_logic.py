@@ -62,9 +62,21 @@ def create_new_client(name, items, total):
     with pd.ExcelWriter("Master R&D.xlsx", mode="a", engine="openpyxl", if_sheet_exists='overlay') as writer:
         df.to_excel(writer, sheet_name="sheet1", index=False)
         altered_dfhome.to_excel(writer, sheet_name=name, index=False)
+    # excel = win32.gencache.EnsureDispatch('Excel.Application')
+    # workbook = excel.Workbooks.Open(
+    #     "D:\AKSHAT\internship_clone\mastering\Master R&D.xlsx")
+    # workbook.Save()
+    # workbook.Close()
+    # excel.Quit()
+    import os
+    current_dir = os.getcwd()
+
+# Construct the full file path for the Excel workbook
+    file_path = os.path.join(current_dir, "Master R&D.xlsx")
+
+    # Initialize Excel application
     excel = win32.gencache.EnsureDispatch('Excel.Application')
-    workbook = excel.Workbooks.Open(
-        "D:\AKSHAT\internship_clone\mastering\Master R&D.xlsx")
+    workbook = excel.Workbooks.Open(file_path)
     workbook.Save()
     workbook.Close()
     excel.Quit()

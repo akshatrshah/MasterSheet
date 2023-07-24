@@ -21,7 +21,7 @@ def submit_values():
                     "Error", "Please enter a valid numerical value for each basket.")
                 return
             values[basket] = int(value)
-        print(values)
+        # print(values)
 
         change_weightage(client, values)
 
@@ -71,7 +71,7 @@ def update_window_size():
 
 
 window = tk.Tk()
-window.title("Numerical Input")
+window.title("Change Weightage")
 window.geometry("500x250")
 window.configure(padx=20, pady=20)  # Increase padx and pady for more padding
 

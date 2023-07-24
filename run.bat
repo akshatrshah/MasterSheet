@@ -1,2 +1,2 @@
 @echo off
-start "" pythonw D:\AKSHAT\internship_clone\mastering\main.py
+start "python D:\AKSHAT\internship_clone\mastering\runner.py"

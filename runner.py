@@ -1,3 +1,4 @@
+import time
 import tkinter as tk
 from tkinter import messagebox
 from tkinter import ttk
@@ -121,4 +122,5 @@ change_weightage_button = tk.Button(
 change_weightage_button.pack(side=tk.LEFT, padx=10, pady=10)
 
 # Start the Tkinter event loop
+time.sleep(1)
 window.mainloop()

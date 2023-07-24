@@ -56,9 +56,15 @@ def deleting_the_specific_stock(stock_name, basket_name):
         with pd.ExcelWriter("Master R&D.xlsx", mode="a", engine="openpyxl", if_sheet_exists='replace') as writer:
             df.to_excel(writer, sheet_name=i, index=False)
 
+    import os
+    current_dir = os.getcwd()
+
+# Construct the full file path for the Excel workbook
+    file_path = os.path.join(current_dir, "Master R&D.xlsx")
+
+    # Initialize Excel application
     excel = win32.gencache.EnsureDispatch('Excel.Application')
-    workbook = excel.Workbooks.Open(
-        "D:\AKSHAT\internship_clone\mastering\Master R&D.xlsx")
+    workbook = excel.Workbooks.Open(file_path)
     workbook.Save()
     workbook.Close()
     excel.Quit()
