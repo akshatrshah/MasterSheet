@@ -30,7 +30,7 @@ def submit_values():
 
 # Create the main Tkinter window
 window = tk.Tk()
-window.title("Dropdown Example")
+window.title("Drop Script")
 
 # Set padding for the window
 window.geometry("300x200")

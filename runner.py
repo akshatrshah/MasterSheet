@@ -68,6 +68,7 @@ def runner(stock_name, quantity):
 
 # Create a new Tkinter window
 window = tk.Tk()
+window.title("Main Page")
 window.geometry('+0+0')
 
 # Create a frame for the input prompts
