@@ -7,10 +7,11 @@ def run_tkinter_app():
     subprocess.Popen(['python', 'runner.py'])
 
 
-root = tk.Tk()
-root.title("Master R&D")
+window = tk.Tk()
+window.title("Lets Start")
+window.geometry('+0+0')
 
-button = tk.Button(root, text="CLICK HERE TO START", command=run_tkinter_app)
+button = tk.Button(window, text="CLICK HERE TO START", command=run_tkinter_app)
 button.pack(pady=20)
 
-root.mainloop()
+window.mainloop()
